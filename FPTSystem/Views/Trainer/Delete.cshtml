@@ -1,0 +1,80 @@
+﻿@model FPTSystem.Models.Trainer
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Trainer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerAccount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerAccount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerPhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerPhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerExpertise)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerExpertise)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerWorkplace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerWorkplace)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

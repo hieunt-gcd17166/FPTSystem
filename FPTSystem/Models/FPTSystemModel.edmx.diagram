@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="93b535e1155d40a397e4dcbfac9e7120" Name="Diagram1">
+        <EntityTypeShape EntityType="FPT_TrainingManagementModel.C__RefactorLog" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FPT_TrainingManagementModel.AdminSystem" Width="1.5" PointX="8.5" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FPT_TrainingManagementModel.Class" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FPT_TrainingManagementModel.Course" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FPT_TrainingManagementModel.Score" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FPT_TrainingManagementModel.Staff" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FPT_TrainingManagementModel.Topic" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FPT_TrainingManagementModel.Trainee" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FPT_TrainingManagementModel.Trainer" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="FPT_TrainingManagementModel.FK_dbo_Class_dbo_Course_CourseID" ManuallyRouted="false" />
+        <AssociationConnector Association="FPT_TrainingManagementModel.FK_dbo_Score_dbo_Class_ClassID" ManuallyRouted="false" />
+        <AssociationConnector Association="FPT_TrainingManagementModel.FK_dbo_Score_dbo_Topic_TopicID" ManuallyRouted="false" />
+        <AssociationConnector Association="FPT_TrainingManagementModel.FK_dbo_Score_dbo_Trainee_TraineeID" ManuallyRouted="false" />
+        <AssociationConnector Association="FPT_TrainingManagementModel.FK_dbo_Topic_dbo_Trainer_TrainerID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

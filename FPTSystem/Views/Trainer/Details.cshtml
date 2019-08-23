@@ -1,0 +1,74 @@
+﻿@model FPTSystem.Models.Trainer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Trainer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerAccount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerAccount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerPhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerPhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerExpertise)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerExpertise)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerWorkplace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerWorkplace)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TrainerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

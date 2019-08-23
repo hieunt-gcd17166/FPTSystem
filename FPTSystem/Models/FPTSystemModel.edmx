@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FPT_TrainingManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminSystem">
+          <Key>
+            <PropertyRef Name="AdminAccount" />
+          </Key>
+          <Property Name="AdminAccount" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdminPassword" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="AdminName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TopicID" Type="nvarchar" MaxLength="20" />
+          <Property Name="CourseID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CourseName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Detail" Type="nvarchar" MaxLength="500" />
+          <Property Name="Duration" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Score">
+          <Key>
+            <PropertyRef Name="TraineeID" />
+            <PropertyRef Name="TopicID" />
+          </Key>
+          <Property Name="TraineeID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TopicID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ClassID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Score" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="StaffID" />
+          </Key>
+          <Property Name="StaffID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="StaffAccount" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StaffPassword" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="StaffName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StaffEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="StaffPhoneNumber" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="TopicID" />
+          </Key>
+          <Property Name="TopicID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TrainerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TopicName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LevelTopic" Type="nvarchar" MaxLength="10" />
+          <Property Name="Detail" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Trainee">
+          <Key>
+            <PropertyRef Name="TraineeID" />
+          </Key>
+          <Property Name="TraineeID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TraineeAccount" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TraineePassword" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TraineeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TraineeAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="TraineePhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="TOIECScore" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Trainer">
+          <Key>
+            <PropertyRef Name="TrainerID" />
+          </Key>
+          <Property Name="TrainerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TrainerAccount" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TrainerPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TrainerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TrainerPhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="TrainerEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrainerExpertise" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrainerWorkplace" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_dbo_Class_dbo_Course_CourseID">
+          <End Role="Course" Type="Self.Course" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Class" Type="Self.Class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Class">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Score_dbo_Class_ClassID">
+          <End Role="Class" Type="Self.Class" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Score_dbo_Topic_TopicID">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="TopicID" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="TopicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Score_dbo_Trainee_TraineeID">
+          <End Role="Trainee" Type="Self.Trainee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainee">
+              <PropertyRef Name="TraineeID" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="TraineeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Topic_dbo_Trainer_TrainerID">
+          <End Role="Trainer" Type="Self.Trainer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainer">
+              <PropertyRef Name="TrainerID" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="TrainerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FPT_TrainingManagementModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminSystem" EntityType="Self.AdminSystem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Score" EntityType="Self.Score" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trainee" EntityType="Self.Trainee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trainer" EntityType="Self.Trainer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Class_dbo_Course_CourseID" Association="Self.FK_dbo_Class_dbo_Course_CourseID">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Class" EntitySet="Class" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Score_dbo_Class_ClassID" Association="Self.FK_dbo_Score_dbo_Class_ClassID">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="Score" EntitySet="Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Score_dbo_Topic_TopicID" Association="Self.FK_dbo_Score_dbo_Topic_TopicID">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="Score" EntitySet="Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Score_dbo_Trainee_TraineeID" Association="Self.FK_dbo_Score_dbo_Trainee_TraineeID">
+            <End Role="Trainee" EntitySet="Trainee" />
+            <End Role="Score" EntitySet="Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Topic_dbo_Trainer_TrainerID" Association="Self.FK_dbo_Topic_dbo_Trainer_TrainerID">
+            <End Role="Trainer" EntitySet="Trainer" />
+            <End Role="Topic" EntitySet="Topic" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FPT_TrainingManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminSystem">
+          <Key>
+            <PropertyRef Name="AdminAccount" />
+          </Key>
+          <Property Name="AdminAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdminPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TopicID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CourseID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_dbo_Class_dbo_Course_CourseID" FromRole="Class" ToRole="Course" />
+          <NavigationProperty Name="Scores" Relationship="Self.FK_dbo_Score_dbo_Class_ClassID" FromRole="Class" ToRole="Score" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CourseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Duration" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Classes" Relationship="Self.FK_dbo_Class_dbo_Course_CourseID" FromRole="Course" ToRole="Class" />
+        </EntityType>
+        <EntityType Name="Score">
+          <Key>
+            <PropertyRef Name="TraineeID" />
+            <PropertyRef Name="TopicID" />
+          </Key>
+          <Property Name="TraineeID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TopicID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClassID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Score1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Class" Relationship="Self.FK_dbo_Score_dbo_Class_ClassID" FromRole="Score" ToRole="Class" />
+          <NavigationProperty Name="Topic" Relationship="Self.FK_dbo_Score_dbo_Topic_TopicID" FromRole="Score" ToRole="Topic" />
+          <NavigationProperty Name="Trainee" Relationship="Self.FK_dbo_Score_dbo_Trainee_TraineeID" FromRole="Score" ToRole="Trainee" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="StaffID" />
+          </Key>
+          <Property Name="StaffID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StaffAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StaffPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StaffName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StaffEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StaffPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="TopicID" />
+          </Key>
+          <Property Name="TopicID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TrainerID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TopicName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LevelTopic" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Scores" Relationship="Self.FK_dbo_Score_dbo_Topic_TopicID" FromRole="Topic" ToRole="Score" />
+          <NavigationProperty Name="Trainer" Relationship="Self.FK_dbo_Topic_dbo_Trainer_TrainerID" FromRole="Topic" ToRole="Trainer" />
+        </EntityType>
+        <EntityType Name="Trainee">
+          <Key>
+            <PropertyRef Name="TraineeID" />
+          </Key>
+          <Property Name="TraineeID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TraineeAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TraineePassword" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TraineeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TraineeAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TraineePhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TOIECScore" Type="Int16" />
+          <NavigationProperty Name="Scores" Relationship="Self.FK_dbo_Score_dbo_Trainee_TraineeID" FromRole="Trainee" ToRole="Score" />
+        </EntityType>
+        <EntityType Name="Trainer">
+          <Key>
+            <PropertyRef Name="TrainerID" />
+          </Key>
+          <Property Name="TrainerID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TrainerAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TrainerPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TrainerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TrainerPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TrainerEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrainerExpertise" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrainerWorkplace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Topics" Relationship="Self.FK_dbo_Topic_dbo_Trainer_TrainerID" FromRole="Trainer" ToRole="Topic" />
+        </EntityType>
+        <Association Name="FK_dbo_Class_dbo_Course_CourseID">
+          <End Role="Course" Type="Self.Course" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Class" Type="Self.Class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Class">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Score_dbo_Class_ClassID">
+          <End Role="Class" Type="Self.Class" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Score_dbo_Topic_TopicID">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="TopicID" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="TopicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Score_dbo_Trainee_TraineeID">
+          <End Role="Trainee" Type="Self.Trainee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainee">
+              <PropertyRef Name="TraineeID" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="TraineeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Topic_dbo_Trainer_TrainerID">
+          <End Role="Trainer" Type="Self.Trainer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainer">
+              <PropertyRef Name="TrainerID" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="TrainerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FPT_TrainingManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
+          <EntitySet Name="AdminSystems" EntityType="Self.AdminSystem" />
+          <EntitySet Name="Classes" EntityType="Self.Class" />
+          <EntitySet Name="Courses" EntityType="Self.Course" />
+          <EntitySet Name="Scores" EntityType="Self.Score" />
+          <EntitySet Name="Staffs" EntityType="Self.Staff" />
+          <EntitySet Name="Topics" EntityType="Self.Topic" />
+          <EntitySet Name="Trainees" EntityType="Self.Trainee" />
+          <EntitySet Name="Trainers" EntityType="Self.Trainer" />
+          <AssociationSet Name="FK_dbo_Class_dbo_Course_CourseID" Association="Self.FK_dbo_Class_dbo_Course_CourseID">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Class" EntitySet="Classes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Score_dbo_Class_ClassID" Association="Self.FK_dbo_Score_dbo_Class_ClassID">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="Score" EntitySet="Scores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Score_dbo_Topic_TopicID" Association="Self.FK_dbo_Score_dbo_Topic_TopicID">
+            <End Role="Topic" EntitySet="Topics" />
+            <End Role="Score" EntitySet="Scores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Score_dbo_Trainee_TraineeID" Association="Self.FK_dbo_Score_dbo_Trainee_TraineeID">
+            <End Role="Trainee" EntitySet="Trainees" />
+            <End Role="Score" EntitySet="Scores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Topic_dbo_Trainer_TrainerID" Association="Self.FK_dbo_Topic_dbo_Trainer_TrainerID">
+            <End Role="Trainer" EntitySet="Trainers" />
+            <End Role="Topic" EntitySet="Topics" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FPT_TrainingManagementModelStoreContainer" CdmEntityContainer="FPT_TrainingManagementEntities">
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="FPT_TrainingManagementModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminSystems">
+            <EntityTypeMapping TypeName="FPT_TrainingManagementModel.AdminSystem">
+              <MappingFragment StoreEntitySet="AdminSystem">
+                <ScalarProperty Name="AdminAccount" ColumnName="AdminAccount" />
+                <ScalarProperty Name="AdminPassword" ColumnName="AdminPassword" />
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="FPT_TrainingManagementModel.Class">
+              <MappingFragment StoreEntitySet="Class">
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="TopicID" ColumnName="TopicID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="FPT_TrainingManagementModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scores">
+            <EntityTypeMapping TypeName="FPT_TrainingManagementModel.Score">
+              <MappingFragment StoreEntitySet="Score">
+                <ScalarProperty Name="TraineeID" ColumnName="TraineeID" />
+                <ScalarProperty Name="TopicID" ColumnName="TopicID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="Score1" ColumnName="Score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="FPT_TrainingManagementModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+                <ScalarProperty Name="StaffAccount" ColumnName="StaffAccount" />
+                <ScalarProperty Name="StaffPassword" ColumnName="StaffPassword" />
+                <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+                <ScalarProperty Name="StaffEmail" ColumnName="StaffEmail" />
+                <ScalarProperty Name="StaffPhoneNumber" ColumnName="StaffPhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Topics">
+            <EntityTypeMapping TypeName="FPT_TrainingManagementModel.Topic">
+              <MappingFragment StoreEntitySet="Topic">
+                <ScalarProperty Name="TopicID" ColumnName="TopicID" />
+                <ScalarProperty Name="TrainerID" ColumnName="TrainerID" />
+                <ScalarProperty Name="TopicName" ColumnName="TopicName" />
+                <ScalarProperty Name="LevelTopic" ColumnName="LevelTopic" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainees">
+            <EntityTypeMapping TypeName="FPT_TrainingManagementModel.Trainee">
+              <MappingFragment StoreEntitySet="Trainee">
+                <ScalarProperty Name="TraineeID" ColumnName="TraineeID" />
+                <ScalarProperty Name="TraineeAccount" ColumnName="TraineeAccount" />
+                <ScalarProperty Name="TraineePassword" ColumnName="TraineePassword" />
+                <ScalarProperty Name="TraineeName" ColumnName="TraineeName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="TraineeAddress" ColumnName="TraineeAddress" />
+                <ScalarProperty Name="TraineePhoneNumber" ColumnName="TraineePhoneNumber" />
+                <ScalarProperty Name="TOIECScore" ColumnName="TOIECScore" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainers">
+            <EntityTypeMapping TypeName="FPT_TrainingManagementModel.Trainer">
+              <MappingFragment StoreEntitySet="Trainer">
+                <ScalarProperty Name="TrainerID" ColumnName="TrainerID" />
+                <ScalarProperty Name="TrainerAccount" ColumnName="TrainerAccount" />
+                <ScalarProperty Name="TrainerPassword" ColumnName="TrainerPassword" />
+                <ScalarProperty Name="TrainerName" ColumnName="TrainerName" />
+                <ScalarProperty Name="TrainerPhoneNumber" ColumnName="TrainerPhoneNumber" />
+                <ScalarProperty Name="TrainerEmail" ColumnName="TrainerEmail" />
+                <ScalarProperty Name="TrainerExpertise" ColumnName="TrainerExpertise" />
+                <ScalarProperty Name="TrainerWorkplace" ColumnName="TrainerWorkplace" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
